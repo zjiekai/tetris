@@ -7,11 +7,13 @@
   var elapsed = 0.0, secPerDrop = 0.4;
 
   function reset() {
+    console.log('reset');
     var T = W * H;
     boardE = document.querySelector('#tetris');
     while( boardE.firstChild ) { 
-      boardE.removeChild(board.firstChild);
+      boardE.removeChild(boardE.firstChild);
     }
+    blks = [];
     boardE.style.width = W * S + 'px';
     boardE.style.height = H * S + 'px';
     for (var i = 0 ; i < T; ++i) {
@@ -58,16 +60,26 @@
     }
   }
 
+  function checkBoard(x, y) {
+    var t = y * W + x;
+    return board[t];
+  }
+
   function moveDown() {
     setBoard();
-    var t = (curY+1) * W + curX;
-    if ((curY < H-1) && (!board[t])) {
+    if ((curY < H-1) && (!checkBoard(curX, curY+1))) {
       curY += 1;
+      setBoard();
     } else {
       setBoard();
+      curX = 4;
       curY = 0;
+      if (checkBoard(curX, curY)) {
+        reset();
+      } else {
+        setBoard();
+      }
     }
-    setBoard();
   }
 
   function moveLeft() {
