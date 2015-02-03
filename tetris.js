@@ -6,6 +6,7 @@
   var curX, curY;
   var elapsed = 0.0, secPerDrop = 0.4;
 
+
   function reset() {
     console.log('reset');
     var T = W * H;
@@ -61,13 +62,17 @@
   }
 
   function checkBoard(x, y) {
+    // false meaning available
+    if (x < 0 || x >= W || y < 0 || y >= H) {
+      return true;
+    }
     var t = y * W + x;
     return board[t];
   }
 
   function moveDown() {
     setBoard();
-    if ((curY < H-1) && (!checkBoard(curX, curY+1))) {
+    if (!checkBoard(curX, curY+1)) {
       curY += 1;
       setBoard();
     } else {
@@ -84,7 +89,7 @@
 
   function moveLeft() {
     setBoard();
-    if (curX > 0) {
+    if (!checkBoard(curX-1, curY)) {
       curX -= 1;
     }
     setBoard();
@@ -92,7 +97,7 @@
 
   function moveRight() {
     setBoard();
-    if (curX < W-1) {
+    if (!checkBoard(curX+1, curY)) {
       curX += 1;
     }
     setBoard();
