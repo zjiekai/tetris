@@ -19,6 +19,6 @@ body {
 }
 
 #tetris > div.block {
-  border: 2px solid #aaa;
-  background: #0f0;
+  border: 2px solid #222;
+  background: #3d5229;
 }

@@ -4,7 +4,7 @@
   var boardE, lastTime, board, elapsed;
   var blks = [];
   var curX, curY;
-  var elapsed = 0.0, secPerDrop = 0.8;
+  var elapsed = 0.0, secPerDrop = 0.4;
 
   function reset() {
     var T = W * H;
@@ -60,9 +60,11 @@
 
   function moveDown() {
     setBoard();
-    if (curY < H) {
+    var t = (curY+1) * W + curX;
+    if ((curY < H-1) && (!board[t])) {
       curY += 1;
     } else {
+      setBoard();
       curY = 0;
     }
     setBoard();
@@ -108,7 +110,6 @@
   function main() {
     var now = Date.now();
     var dt = (now - lastTime) / 1000.0;
-    console.log(curX, curY);
 
     update(dt);
     render();
