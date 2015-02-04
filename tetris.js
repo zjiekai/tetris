@@ -6,6 +6,30 @@
   var curX, curY;
   var elapsed = 0.0, secPerDrop = 0.4;
 
+  var TL = -W-1, TC = -W, TR = -W+1,
+    ML = -1, MR = 1, BL = W-1, BC = W, BR = W+1;
+
+  var shapes = [
+    [7, TL, TC, MR], //0
+    [8, TR, TC, ML], //1
+    [9, ML, MR, BC], //2
+    [3, TL, TC, ML], //3
+    [12,ML, BL, MR], //4
+    [15,ML, BR, MR], //5
+    [18,ML, MR,  2], //6
+    [0, TC, ML, BL], //7
+    [1, TC, MR, BR], //8
+    [10,TC, MR, BC], //9
+    [11,TC, MR, MR], //10
+    [2, TC, ML, BC], //11
+    [13,TC, BC, BR], //12
+    [14,TR, ML, MR], //13
+    [4, TL, TC, BC], //14
+    [16,TR, ML, MR], //15
+    [17,TL, MR, ML], //16
+    [5, TC, BC, BL], //17
+    [6, TC, BC, 2*W] //18
+  ];
 
   function reset() {
     console.log('reset');
